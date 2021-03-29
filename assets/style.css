@@ -1,0 +1,21 @@
+main {
+    margin: auto;
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+.timer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.choices {
+    display: block;
+    justify-content: center;
+}
+
+
+

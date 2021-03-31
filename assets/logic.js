@@ -8,8 +8,11 @@ var questionChoices = document.querySelector("#choices");
 var count = 75;
 var correctAnswer = 0;
 var timer;
-
-// starts the game, moves from the start screen and enters the quiz
+var answerElement = document.getElementById("showAnswer");
+var inputElement = document.getElementById("initials");
+var submitButton = document.getElementById("submit")
+ 
+// starts the game, moves from the start screen and enters the quiz, starts the settime function
 function startQuiz() {
   setTime();
   var startScreen = document.querySelector("#start-screen");
@@ -20,13 +23,14 @@ function startQuiz() {
 
   timer = setInterval(setTime, 1000);
 }
-
+// gets the current question including title runs the for loop 
 function getCurrentQuestion() {
   var currentQuestion = questions[currentQuestionIndex];
   var titleElement = document.querySelector("#question-title");
   titleElement.textContent = currentQuestion.title;
   console.log(currentQuestion);
   questionChoices.innerHTML = "";
+  answerElement.innerHTML = "";
   for (var i = 0; i < currentQuestion.choice.length; i++) {
     var userChoice = document.createElement("button");
     userChoice.setAttribute("class", "choices");
@@ -38,17 +42,20 @@ function getCurrentQuestion() {
     questionChoices.appendChild(userChoice);
   }
 }
-
+// the users choice function, decides if the user choice was right or wrong
+// if questions reach zero calls for gaemover function
 function choiceClick() {
   console.log(this);
   // if the answer that was clicked is correct, notify the user "correct!"
-  var answerElement = document.getElementById("showAnswer")
   if (this.value === questions[currentQuestionIndex].answer) {
-    answerElement.innerHTML = "Correct!"
+    answerElement.textContent = "Correct!"
     correctAnswer = correctAnswer + 1;
   } else {
-    answerElement.innerHTML = "Wrong!"
+    answerElement.textContent = "Wrong!"
     count = count -10;
+    if (count <=0){
+      count=0
+    }
   }
 
   currentQuestionIndex++;
@@ -58,41 +65,41 @@ function choiceClick() {
     getCurrentQuestion();
   }
 }
-
+// sets time properties 
 function setTime() {
+  count--
   timerElement.textContent = count;
   if (count <=0) {
-    stopTimer();
-  } else {
-    count--
-  }
+    gameOver();
+}
 }
 
-function stopTimer () {
-  clearInterval(timer);
-}
-
-
+// ends the game, calls the endscreen to show by removing the "hide" class
 function gameOver () {
-  stopTimer();
+  clearInterval(timer);
   var pointElement = document.getElementById("showPoints")
   var endscreen = document.querySelector("#end-screen");
-  endscreen.setAttribute("class", "choice");
+  endscreen.removeAttribute("class");
   questionsElement.setAttribute("class", "hide");
-  pointElement.innerHTML = "Your total points are" + " " + correctAnswer;
+  pointElement.innerHTML = "Total correct answers:" + " " + correctAnswer;
+}
+// gets the value of the users score and logs them along with the initials
+function submitScore() {
+  var initials=inputElement.value;
+  console.log(initials);
+  var scores=JSON.parse(localStorage.getItem("scores")) || [];
+  var newScore={
+    initials:initials,
+    score:count
+  }
+
+
+//pushes the score to local storage in a string
+scores.push(newScore);
+localStorage.setItem("scores", JSON.stringify(scores));
 }
 
+
+submitButton.onclick= submitScore;
 startBtn.onclick = startQuiz;
 
-
-
-
-//  if (timeLeft == 0 || questions[currentQuestionIndex] == undefined) {
-//         alert("Time has expired, game over")
-// }
-// else
-// reduce 10 seconds
-// get the next question
-//if we reach the last question then run "game over" function else run/get current question
-//clear timer
-//hide questions div and unhide the end screen div

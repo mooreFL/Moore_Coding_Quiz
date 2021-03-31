@@ -20,10 +20,17 @@ main {
     justify-content: flex-end;
 }
 
-.choices {
+.choice {
     display: block;
     justify-content: center;
 }
+
+
+
+/* .choice {
+    display: block;
+    justify-content: center;
+} */
 
 button {
     font-size: 20px;

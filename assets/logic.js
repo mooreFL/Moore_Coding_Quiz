@@ -1,7 +1,6 @@
 var currentQuestionIndex = 0;
-// var time = questions.length * 15;
 
-var startBtn = document.querySelector("#start");
+var startButton = document.querySelector("#start");
 var questionsElement = document.querySelector("#questions");
 var timerElement = document.querySelector("#time");
 var questionChoices = document.querySelector("#choices");
@@ -83,8 +82,12 @@ function gameOver () {
   questionsElement.setAttribute("class", "hide");
   pointElement.innerHTML = "Total correct answers:" + " " + correctAnswer;
 }
+
+
 // gets the value of the users score and logs them along with the initials
 function submitScore() {
+  var scoresUrl="./scores.html"
+  window.location = scoresUrl;
   var initials=inputElement.value;
   console.log(initials);
   var scores=JSON.parse(localStorage.getItem("scores")) || [];
@@ -101,5 +104,5 @@ localStorage.setItem("scores", JSON.stringify(scores));
 
 
 submitButton.onclick= submitScore;
-startBtn.onclick = startQuiz;
+startButton.onclick = startQuiz;
 

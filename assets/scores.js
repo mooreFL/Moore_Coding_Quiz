@@ -19,5 +19,14 @@ for (let index = 0; index < scores.length; index++) {
 
     
 }
-// "finalscore", JSON.stringify
+
+var backButtonEl = document.getElementById("retryquiz");
+backButtonEl.addEventListener("click", backQuiz);
+
+function backQuiz () {
+    var homeUrl = "./index.html"
+    window.location = homeUrl
+}
+
+
 

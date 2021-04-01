@@ -8,7 +8,7 @@ var questions = [
     },
     {
         title: "Which method returns the string representation of the number's value?",
-        choice: ["toValue()", "toNumber()", "toString()", "None of the above"],
+        choice: ["toValue()", "toNumber()", "None of the above", "toString()"],
         answer: "toString()"
     },
     {
@@ -22,9 +22,9 @@ var questions = [
         answer: "reverse()"
     },
     {
-        title: "Who won the last super bowl?",
-        choice: ["Buccaneers", "Bengals", "Cowboys", "None of the above"],
-        answer: "Buccaneers"
+        title: "How do you call a function named myFunction?",
+        choice: ["myFunction()", "call myFunction()", "call function myFunction()", "None of the above"],
+        answer: "myFunction()"
     }
     
 ]
